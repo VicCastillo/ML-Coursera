@@ -27,8 +27,11 @@ J = (sum((X*theta-y).^2) + lambda*sum(temp.^2))/2/m;
 
 
 % =========================================================================
-
 grad = grad(:);
-grad = (sum((X*theta-y) .* X) + lambda*temp')/m;
+#unsatifying but avoids warning message 
+for i=1:size(theta,1);
+    grad(i) = sum((X*theta-y) .* X(:,i))/m + lambda*temp(i)/m;
+endfor
+
 
 end
